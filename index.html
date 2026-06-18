@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Canvas de partículas -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ======================================================
+       HEADER — Navegación flotante tipo cápsula
+  ====================================================== -->
+  <header class="site-header" role="banner">
+    <nav class="nav-capsule" aria-label="Navegación principal">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-menu">
+        <div class="nav-pill" id="nav-pill" aria-hidden="true"></div>
+        <a href="#hero" class="nav-link active">Sobre mí</a>
+        <a href="#proyectos" class="nav-link">Proyectos</a>
+        <a href="#formacion" class="nav-link">Formación</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <main id="main-content">
+
+    <!-- ======================================================
+         1. HERO
+    ====================================================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-name">
+      <div class="hero-inner">
+
+        <h1 class="hero-name fade-up" id="hero-name" style="--delay: 0.1s">Amed Torres</h1>
+
+        <p class="hero-role fade-up" style="--delay: 0.2s">
+          Desarrollador de Software & Soluciones IA
+        </p>
+
+        <p class="hero-bio fade-up" style="--delay: 0.3s">
+          Soy un Desarrollador de Software enfocado en la creación de arquitecturas robustas, integraciones complejas
+          y la optimización de flujos de trabajo mediante automatización e inteligencia artificial.
+        </p>
+
+        <p class="hero-bio fade-up" style="--delay: 0.3s">
+          Creo soluciones digitales a medida, desde páginas web, aplicaciones, sistemas de gestión, bases de datos y
+          herramientas digitales adaptadas a las necesidades de cada proyecto.
+        </p>
+
+        <svg width="0" height="0" style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+          <defs>
+            <linearGradient id="traitGradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0f172a" />
+              <stop offset="100%" stop-color="#2563eb" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div class="hero-traits fade-up" style="--delay: 0.35s">
+          <div class="trait-item">
+            <svg class="trait-icon" viewBox="0 0 24 24" fill="none" stroke="url(#traitGradient)" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <!-- Cúpula de la bombilla -->
+              <path d="M9 18h6" />
+              <path d="M10 22h4" />
+              <path
+                d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5" />
+              <!-- Destellos / Rayos de luz -->
+              <line x1="12" y1="2" x2="12" y2="4" />
+              <line x1="19" y1="9" x2="21" y2="9" />
+              <line x1="3" y1="9" x2="5" y2="9" />
+              <line x1="17.6" y1="3.4" x2="16.2" y2="4.8" />
+              <line x1="6.4" y1="3.4" x2="7.8" y2="4.8" />
+            </svg>
+            <span>Innovador</span>
+          </div>
+          <div class="trait-item">
+            <svg class="trait-icon" viewBox="0 0 24 24" fill="none" stroke="url(#traitGradient)" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Analítico</span>
+          </div>
+          <div class="trait-item">
+            <svg class="trait-icon" viewBox="0 0 24 24" fill="none" stroke="url(#traitGradient)" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <!-- Pieza de rompecabezas base -->
+              <path d="M3 4h8v4a3 3 0 1 0 0 6v6H3z" />
+              <!-- Pieza que falta, desplazada y encajando -->
+              <path d="M14 2h6v4a3 3 0 1 1 0 6v6h-6v-6a3 3 0 1 1 0-6V2z" />
+              <!-- Chispa / Destello brillante -->
+              <path d="M21 0l.75 1.5L23.25 2l-1.5.75L21 4l-.75-1.5L18.75 2l1.5-.75z" fill="url(#traitGradient)"
+                stroke="none" />
+              <circle cx="21" cy="11" r="1" fill="url(#traitGradient)" stroke="none" />
+            </svg>
+            <span>Creativo</span>
+          </div>
+          <div class="trait-item">
+            <svg class="trait-icon" viewBox="0 0 24 24" fill="none" stroke="url(#traitGradient)" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <span>Resolutivo</span>
+          </div>
+          <div class="trait-item">
+            <svg class="trait-icon" viewBox="0 0 24 24" fill="none" stroke="url(#traitGradient)" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span>Proactivo</span>
+          </div>
+        </div>
+
+        <div class="hero-actions fade-up" style="--delay: 0.4s">
+          <a href="#proyectos" class="btn btn-primary">
+            Ver proyectos
+          </a>
+          <a href="#contacto" class="btn btn-ghost">Contactar</a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Separador visual -->
+    <div class="section-divider" aria-hidden="true">
+      <span class="divider-dot"></span>
+      <span class="divider-line"></span>
+      <span class="divider-dot"></span>
+    </div>
+
+    <!-- ======================================================
+         3. STACK TECNOLÓGICO
+    ====================================================== -->
+    <section class="section section-alt" id="stack" aria-labelledby="stack-title">
+      <div class="section-inner">
+
+        <div class="section-label">/ Herramientas</div>
+        <h2 class="section-title" id="stack-title">Stack Tecnológico</h2>
+
+        <div class="stack-groups">
+
+          <div class="stack-group reveal">
+            <div class="stack-grid">
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--java" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="30" height="30">
+                    <path fill="#0074BD"
+                      d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z" />
+                    <path fill="#EA2D2E"
+                      d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z" />
+                    <path fill="#0074BD"
+                      d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z" />
+                    <path fill="#EA2D2E"
+                      d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z" />
+                    <path fill="#0074BD"
+                      d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Java</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--html" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="25" height="25">
+                    <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z" />
+                    <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z" />
+                    <path fill="#EBEBEB"
+                      d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z" />
+                    <path fill="#fff"
+                      d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">HTML5</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--css" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="25" height="25">
+                    <path fill="#1572B6"
+                      d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z" />
+                    <path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z" />
+                    <path fill="#fff"
+                      d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z" />
+                    <path fill="#EBEBEB"
+                      d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z" />
+                    <path fill="#fff"
+                      d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z" />
+                    <path fill="#EBEBEB"
+                      d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">CSS3</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--js" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="25" height="25">
+                    <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z" />
+                    <path fill="#323330"
+                      d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">JavaScript</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--python" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="30" height="30">
+                    <linearGradient id="py-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659"
+                      y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)">
+                      <stop offset="0" stop-color="#5A9FD4" />
+                      <stop offset="1" stop-color="#306998" />
+                    </linearGradient>
+                    <linearGradient id="py-b" gradientUnits="userSpaceOnUse" x1="209.474" y1="1098.811" x2="173.62"
+                      y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)">
+                      <stop offset="0" stop-color="#FFD43B" />
+                      <stop offset="1" stop-color="#FFE873" />
+                    </linearGradient>
+                    <path fill="url(#py-a)"
+                      d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"
+                      transform="translate(0 10.26)" />
+                    <path fill="url(#py-b)"
+                      d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"
+                      transform="translate(0 10.26)" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Python</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--git" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="25" height="25">
+                    <path fill="#F34F29"
+                      d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.333 3.264 58.123a8.133 8.133 0 000 11.5l55.117 55.114c3.174 3.174 8.32 3.174 11.499 0l54.858-54.858a8.135 8.135 0 00-.001-11.501z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Git & GitHub</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--c" aria-hidden="true">
+                  <svg viewBox="0 0 306 345" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none">
+                    <g clip-path="url(#a)">
+                      <path fill="#00599C"
+                        d="M302.107 258.262c2.401-4.159 3.893-8.845 3.893-13.053V99.139c0-4.207-1.49-8.892-3.892-13.051L153 172.175l149.107 86.087Z" />
+                      <path fill="#004482"
+                        d="m166.25 341.193 126.5-73.034c3.644-2.104 6.956-5.737 9.357-9.897L153 172.175 3.893 258.263c2.4 4.159 5.714 7.793 9.357 9.896l126.5 73.034c7.287 4.208 19.213 4.208 26.5 0Z" />
+                      <path fill="#659AD2"
+                        d="M302.108 86.087c-2.402-4.16-5.715-7.793-9.358-9.897L166.25 3.156c-7.287-4.208-19.213-4.208-26.5 0L13.25 76.19C5.962 80.397 0 90.725 0 99.14v146.069c0 4.208 1.491 8.894 3.893 13.053L153 172.175l149.108-86.088Z" />
+                      <path fill="#fff"
+                        d="M153 274.175c-56.243 0-102-45.757-102-102s45.757-102 102-102c36.292 0 70.139 19.53 88.331 50.968l-44.143 25.544c-9.105-15.736-26.038-25.512-44.188-25.512-28.122 0-51 22.878-51 51 0 28.121 22.878 51 51 51 18.152 0 35.085-9.776 44.191-25.515l44.143 25.543c-18.192 31.441-52.04 50.972-88.334 50.972Z" />
+                    </g>
+                    <defs>
+                      <clipPath id="a">
+                        <path fill="#fff" d="M0 0h306v344.35H0z" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">C</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--kotlin" aria-hidden="true">
+                  <svg viewBox="0 0 256 256" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="xMidYMid">
+                    <defs>
+                      <linearGradient x1="99.991%" y1="-.011%" x2=".01%" y2="100.01%" id="a">
+                        <stop stop-color="#E44857" offset=".344%" />
+                        <stop stop-color="#C711E1" offset="46.89%" />
+                        <stop stop-color="#7F52FF" offset="100%" />
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#a)" d="M256 256H0V0h256L128 127.949z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Kotlin</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <div class="stack-grid">
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--sql" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" preserveAspectRatio="xMidYMid"
+                    viewBox="0 0 256 252">
+                    <path fill="#00546B"
+                      d="M236 194c-14 0-25 1-34 5-3 1-7 1-7 4l3 6c2 3 5 8 9 11l11 8 21 10 11 9 6 4-3-6-5-5c-5-7-11-13-18-18-6-3-18-9-20-15h-1l12-3 18-3 8-2v-2l-9-10c-8-8-18-15-28-22l-18-8c-2-1-6-2-7-4l-7-13-15-30-8-20c-18-30-38-48-68-65-6-4-14-5-22-7l-13-1-8-6C34 5 8-9 1 9c-5 11 7 22 11 28l9 13 3 9c3 8 5 17 9 24l6 10c2 2 4 3 5 6-3 4-3 9-4 13-7 20-4 44 5 59 2 4 9 14 18 10 8-3 6-13 8-22l1-4 8 14c5 9 14 18 22 24 4 3 8 8 13 10l-4-4-9-10c-8-10-14-21-20-32l-7-17-3-6c-3 4-7 7-9 12-3 7-3 17-4 26h-1c-6-1-8-7-10-12-5-12-6-32-1-46 1-4 6-15 4-19-1-3-4-5-6-7l-7-12-10-30-9-13c-3-5-7-8-10-14-1-2-2-5 0-7l2-2c2-2 9 0 11 1 6 3 12 5 17 9l8 6h4c6 1 12 0 17 2 9 3 18 7 25 12 23 14 42 35 54 59 3 4 3 8 5 12l12 26c4 8 7 16 12 23 3 4 14 6 18 8l12 4 18 12c2 2 11 7 12 10Z" />
+                    <path fill="#00546B" d="m58 43-7 1 6 7 4 9v-1c3-1 4-4 4-8l-2-4-5-4Z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">MySQL</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--firebase" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 600 600">
+                    <path fill="#FF9100"
+                      d="M213.918 560.499c23.248 9.357 48.469 14.909 74.952 15.834 35.84 1.252 69.922-6.158 100.391-20.234-36.537-14.355-69.627-35.348-97.869-61.448-18.306 29.31-45.382 52.462-77.474 65.848Z" />
+                    <path fill="#FFC400"
+                      d="M291.389 494.66c-64.466-59.622-103.574-145.917-100.269-240.568.108-3.073.27-6.145.46-9.216a166.993 166.993 0 0 0-36.004-5.241 167.001 167.001 0 0 0-51.183 6.153c-17.21 30.145-27.594 64.733-28.888 101.781-3.339 95.611 54.522 179.154 138.409 212.939 32.093-13.387 59.168-36.51 77.475-65.848Z" />
+                    <path fill="#FF9100"
+                      d="M291.39 494.657c14.988-23.986 24.075-52.106 25.133-82.403 2.783-79.695-50.792-148.251-124.942-167.381-.19 3.071-.352 6.143-.46 9.216-3.305 94.651 35.803 180.946 100.269 240.568Z" />
+                    <path fill="#DD2C00"
+                      d="M308.231 20.858C266 54.691 232.652 99.302 212.475 150.693c-11.551 29.436-18.81 61.055-20.929 94.2 74.15 19.13 127.726 87.686 124.943 167.38-1.058 30.297-10.172 58.39-25.134 82.404 28.24 26.127 61.331 47.093 97.868 61.447 73.337-33.9 125.37-106.846 128.383-193.127 1.952-55.901-19.526-105.724-49.875-147.778-32.051-44.477-159.5-194.36-159.5-194.36Z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Firebase BaaS</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--make" aria-hidden="true">
+                  <svg fill="#6D00CC" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="25"
+                    height="25">
+                    <title>Make</title>
+                    <path
+                      d="M13.38 3.498c-.27 0-.511.19-.566.465L9.85 18.986a.578.578 0 0 0 .453.678l4.095.826a.58.58 0 0 0 .682-.455l2.963-15.021a.578.578 0 0 0-.453-.678l-4.096-.826a.589.589 0 0 0-.113-.012zm-5.876.098a.576.576 0 0 0-.516.318L.062 17.697a.575.575 0 0 0 .256.774l3.733 1.877a.578.578 0 0 0 .775-.258l6.926-13.781a.577.577 0 0 0-.256-.776L7.762 3.658a.571.571 0 0 0-.258-.062zm11.74.115a.576.576 0 0 0-.576.576v15.426c0 .318.258.578.576.578h4.178a.58.58 0 0 0 .578-.578V4.287a.578.578 0 0 0-.578-.576Z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Make</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--docker" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#008fe2">
+                    <path d="M13.98 11.08h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.95-5.43h2.12a.19.19 0 0 0 
+                      .18-.19V3.57a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m0 2.71h2.12a.19.19 0 0 0 .18-.18V6.29a.19.19 0 0 0-.18-.18h-2.12a.18.18 
+                      0 0 0-.19.18v1.89c0 .1.09.18.19.18m-2.93 0h2.12a.19.19 0 0 0 .18-.18V6.29a.18.18 0 0 0-.18-.18H8.1a.18.18 0 0 0-.18.18v1.89c0 .1.08.18.18.18m-2.96 0h2.11a.19.19 
+                      0 0 0 .19-.18V6.29a.18.18 0 0 0-.19-.18H5.14a.19.19 0 0 0-.19.18v1.89c0 .1.08.18.19.18m5.89 2.72h2.12a.19.19 0 0 0 .18-.19V9.01a.19.19 0 0 0-.18-.19h-2.12a.18.18 
+                      0 0 0-.19.18v1.9c0 .1.09.18.19.18m-2.93 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H8.1a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.96 0h2.11a.18.18 
+                      0 0 0 .19-.19V9.01a.18.18 0 0 0-.18-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .1.08.19.19.19m-2.92 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H2.22a.18.18 
+                      0 0 0-.19.18v1.9c0 .1.08.18.19.18m21.54-1.19c-.06-.05-.67-.51-1.95-.51-.34 0-.68.03-1.01.09a3.77 3.77 0 0 0-1.72-2.57l-.34-.2-.23.33a4.6 4.6 0 0 0-.6 1.43c-.24.97-.1 1.88.4 2.66a4.7 4.7 
+                      0 0 1-1.75.42H.76a.75.75 0 0 0-.76.75 11.38 11.38 0 0 0 .7 4.06 6.03 6.03 0 0 0 2.4 3.12c1.18.73 3.1 1.14 5.28 1.14.98 0 1.96-.08 2.93-.26a12.25 12.25 0 0 0 3.82-1.4 10.5 10.5 
+                      0 0 0 2.61-2.13c1.25-1.42 2-3 2.55-4.4h.23c1.37 0 2.21-.55 2.68-1 .3-.3.55-.66.7-1.06l.1-.28Z" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">Docker</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--postgresql" aria-hidden="true">
+                  <img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/postgresql/default.svg"
+                    alt="PostgreSQL" width="24" height="24" />
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">PostgreSQL</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--sql" aria-hidden="true">
+                  <svg viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg" width="25" height="25">
+                    <path
+                      d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z"
+                      fill="url(#paint0_linear)" />
+                    <path
+                      d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z"
+                      fill="url(#paint1_linear)" fill-opacity="0.2" />
+                    <path
+                      d="M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z"
+                      fill="#3ECF8E" />
+                    <defs>
+                      <linearGradient id="paint0_linear" x1="53.9738" y1="54.974" x2="94.1635" y2="71.8295"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#249361" />
+                        <stop offset="1" stop-color="#3ECF8E" />
+                      </linearGradient>
+                      <linearGradient id="paint1_linear" x1="36.1558" y1="30.578" x2="54.4844" y2="65.0806"
+                        gradientUnits="userSpaceOnUse">
+                        <stop />
+                        <stop offset="1" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+
+                <div class="stack-meta">
+                  <span class="stack-name">SupaBase</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--make" aria-hidden="true">
+                  <svg width="25" height="25" viewBox="0 0 228 120" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M204 48C192.817 48 183.42 40.3514 180.756 30H153.248C147.382 30 142.376 34.241 141.412 40.0272L140.425 45.9456C139.489 51.5648 136.646 56.4554 132.626 60C136.646 63.5446 139.489 68.4352 140.425 74.0544L141.412 79.9728C142.376 85.759 147.382 90 153.248 90H156.756C159.42 79.6486 168.817 72 180 72C193.255 72 204 82.7452 204 96C204 109.255 193.255 120 180 120C168.817 120 159.42 112.351 156.756 102H153.248C141.516 102 131.504 93.5181 129.575 81.9456L128.588 76.0272C127.624 70.241 122.618 66 116.752 66H107.244C104.58 76.3514 95.183 84 84 84C72.817 84 63.4204 76.3514 60.7561 66H47.2439C44.5796 76.3514 35.183 84 24 84C10.7452 84 0 73.2548 0 60C0 46.7452 10.7452 36 24 36C35.183 36 44.5796 43.6486 47.2439 54H60.7561C63.4204 43.6486 72.817 36 84 36C95.183 36 104.58 43.6486 107.244 54H116.752C122.618 54 127.624 49.759 128.588 43.9728L129.575 38.0544C131.504 26.4819 141.516 18 153.248 18L180.756 18C183.42 7.64864 192.817 0 204 0C217.255 0 228 10.7452 228 24C228 37.2548 217.255 48 204 48ZM204 36C210.627 36 216 30.6274 216 24C216 17.3726 210.627 12 204 12C197.373 12 192 17.3726 192 24C192 30.6274 197.373 36 204 36ZM24 72C30.6274 72 36 66.6274 36 60C36 53.3726 30.6274 48 24 48C17.3726 48 12 53.3726 12 60C12 66.6274 17.3726 72 24 72ZM96 60C96 66.6274 90.6274 72 84 72C77.3726 72 72 66.6274 72 60C72 53.3726 77.3726 48 84 48C90.6274 48 96 53.3726 96 60ZM192 96C192 102.627 186.627 108 180 108C173.373 108 168 102.627 168 96C168 89.3726 173.373 84 180 84C186.627 84 192 89.3726 192 96Z"
+                      fill="#ea4b71" />
+                  </svg>
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">n8n</span>
+                </div>
+              </div>
+
+              <div class="stack-item">
+                <div class="stack-icon stack-icon--llms" aria-hidden="true">
+                  <svg xmlns="http://w3.org" viewBox="0 0 100 100" width="35" height="35">
+                    <path d="M50,20 C35,20 25,30 25,45 C25,55 32,60 35,68 C37,73 43,80 50,80" fill="none"
+                      stroke="#2563eb" stroke-width="5" stroke-linecap="round" />
+
+                    <path d="M50,20 C65,20 75,30 75,45 C75,55 68,60 65,68 C63,73 57,80 50,80" fill="none"
+                      stroke="#06b6d4" stroke-width="5" stroke-linecap="round" stroke-dasharray="3 5" />
+
+                    <circle cx="75" cy="45" r="3" fill="#06b6d4" />
+                    <circle cx="68" cy="60" r="3" fill="#06b6d4" />
+                    <circle cx="65" cy="30" r="3" fill="#06b6d4" />
+
+                    <line x1="50" y1="20" x2="50" y2="80" stroke="#7c3aed" stroke-width="3" />
+                    <circle cx="50" cy="50" r="5" fill="#7c3aed" />
+                  </svg>
+
+                </div>
+                <div class="stack-meta">
+                  <span class="stack-name">LLMs</span>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Separador visual -->
+    <div class="section-divider" aria-hidden="true">
+      <span class="divider-dot"></span>
+      <span class="divider-line"></span>
+      <span class="divider-dot"></span>
+    </div>
+
+    <!-- ======================================================
+         4. PROYECTOS
+    ====================================================== -->
+    <section class="section" id="proyectos" aria-labelledby="projects-title">
+      <div class="section-inner">
+
+        <div class="section-label">/ Portfolio</div>
+        <h2 class="section-title" id="projects-title">Proyectos</h2>
+
+        <div class="projects-list">
+
+          <article class="project-card reveal">
+            <div class="project-icon" aria-hidden="true">
+              <img src="assets/logo_clasifAI.png" alt="logo ClasifAI" width="58" height="58">
+            </div>
+            <h3 class="project-title">
+              ClasifAI <a href="https://github.com/amedtorres" target="_blank" rel="noopener noreferrer"
+                aria-label="Ver repositorio de ClasifAI">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </h3>
+            <span class="project-year">Full Stack & Automatización AI</span>
+            <p class="project-desc">
+              Plataforma de automatización orientada a la clasificación inteligente de leads.
+            </p>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-icon" aria-hidden="true">
+              <img src="assets/password_logo.png" alt="logo password generator" width="58" height="58">
+            </div>
+            <h3 class="project-title">
+              Password Generator
+              <a href="https://github.com/amedtorres/PASSWORD-GENERATOR" target="_blank" rel="noopener noreferrer"
+                aria-label="Ver repositorio de Password Generator">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </h3>
+            <span class="project-year">Java Desktop</span>
+            <p class="project-desc">
+              Aplicación en JavaFX que permite generar contraseñas aleatorias y personalizables.
+            </p>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-icon" aria-hidden="true">
+              <img src="assets/logobd.png" alt="icono BagDrop" width="55" height="55">
+            </div>
+            <h3 class="project-title">
+              BagDrop
+              <a href="https://github.com/amedtorres/tfg_tfc_DAM" target="_blank" rel="noopener noreferrer"
+                aria-label="Ver repositorio de BagDrop">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </h3>
+            <span class="project-year">App Android</span>
+            <p class="project-desc">
+              Aplicación Android para la gestión de reservas de consignas de equipajes.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Separador visual -->
+    <div class="section-divider" aria-hidden="true">
+      <span class="divider-dot"></span>
+      <span class="divider-line"></span>
+      <span class="divider-dot"></span>
+    </div>
+
+    <!-- ======================================================
+         5. FORMACIÓN & CERTIFICACIONES
+    ====================================================== -->
+    <section class="section section-alt" id="formacion" aria-labelledby="edu-title">
+      <div class="section-inner">
+
+        <div class="section-label">/ Trayectoria</div>
+        <h2 class="section-title" id="edu-title">Formación</h2>
+
+        <div class="education-grid">
+
+          <!-- Timeline -->
+          <div class="timeline reveal" aria-label="Estudios oficiales">
+            <h3 class="edu-col-title">Estudios</h3>
+            <ol class="timeline-list">
+              <!-- <li class="timeline-item">
+                <time class="timeline-date">Actualidad</time>
+                <h4 class="timeline-item-title">Máster en IA y Data Engineering</h4>
+                <p class="timeline-item-desc">
+                  Especialización en el ecosistema de datos, IA generativa, LLMs y ML.
+                </p> 
+              </li>-->
+
+              <li class="timeline-item">
+                <time class="timeline-date">Constante</time>
+                <h4 class="timeline-item-title">Aprendizaje Autodidacta</h4>
+                <p class="timeline-item-desc">
+                  Nuevos paradigmas de IA (LLMs), Automatizaciones No-Code, Low-Code, Patrones de diseño, BBDD, Cloud,
+                  Front-end y
+                  Back-end.
+                </p>
+              </li>
+              <li class="timeline-item">
+                <time class="timeline-date" datetime="2026">2024 — 2026</time>
+                <h4 class="timeline-item-title">
+                  FP Grado Superior DAM<br>
+                  <span>Desarrollo de Aplicaciones Multiplataforma</span>
+                </h4>
+                <p class="timeline-item-desc">
+                  Ciclo de vida del software, programación POO, bases de datos relacionales y entornos móviles, web y de
+                  escritorio.
+                </p>
+              </li>
+
+            </ol>
+          </div>
+
+          <!-- Certificaciones -->
+          <div class="certs-panel reveal" aria-label="Certificaciones">
+            <h3 class="edu-col-title">Cursos Y Certificaciones</h3>
+
+            <!-- Slider -->
+            <div class="certs-slider" role="region" aria-label="Carrusel de certificaciones">
+              <div class="certs-track" id="certs-track">
+
+                <!-- Página 1 (5 certificaciones) -->
+                <div class="certs-page" role="group" aria-label="Página 1 de 2">
+                  <a href="assets/certs/aws-academy-graduate-cloud-foundations-training-bad.png" target="_blank"
+                    rel="noopener noreferrer" class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        fill-rule="evenodd">
+                        <path
+                          d="M6.763 11.212c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 01-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 01-.287-.375 6.18 6.18 
+                          0 01-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.39-.384-.59-.894-.59-1.533 0-.678.24-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 
+                          .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.4 2.4 
+                          0 01-.28.104.488.488 0 01-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 01.224-.167 4.577 4.577 0 011.005-.36 4.84 4.84 0 011.246-.151c.95 
+                          0 1.644.216 2.091.647.44.43.662 1.085.662 1.963v2.586h.016zm-3.24 1.214c.263 0 .534-.048.822-.144a1.78 1.78 0 00.758-.51 1.27 1.27 0 00.272-.512c.047-.191.08-.423.08-.694v-.335a6.66 6.66 
+                          0 00-.735-.136 6.02 6.02 0 00-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 6.726a1.398 1.398 
+                          0 01-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 01.32-.08h.638c.152 
+                          0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 01.311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 
+                          0 01-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 01-.303.08h-.687c-.15 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32L12.32 7.747l-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08l-.686.001zm10.256.215c-.415 
+                          0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 01-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.32.064.63.096.95.096.502 
+                          0 .894-.088 1.165-.264a.86.86 0 00.415-.758.777.777 0 00-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 01-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 
+                          0 .36.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 01.24.2.43.43 0 01.071.263v.375c0 .168-.064.256-.184.256a.83.83 0 01-.303-.096 3.652 3.652 0 00-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 
+                          0 .224.08.416.24.567.16.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926a2.157 2.157 0 01-.583.703c-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167z" />
+                        <path
+                          d="M.378 15.475c3.384 1.963 7.56 3.153 11.877 3.153 2.914 0 6.114-.607 9.06-1.852.44-.2.814.287.383.607-2.626 1.94-6.442 2.969-9.722 2.969-4.598 0-8.74-1.7-11.87-4.526-.247-.223-.024-.527.272-.351zm23.531-.2c.287.36-.08 2.826-1.485 
+                          4.007-.215.184-.423.088-.327-.151l.175-.439c.343-.88.802-2.198.52-2.555-.336-.43-2.22-.207-3.074-.103-.255.032-.295-.192-.063-.36 1.5-1.053 3.967-.75 4.254-.399z"
+                          fill="#F90" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Cloud Fundations</strong>
+                      <span>AWS Academy</span>
+                    </div>
+                  </a>
+
+                  <a href="assets/certs/Cerificado_IA-amedtorres.pdf" target="_blank" rel="noopener noreferrer"
+                    class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg xmlns="http://w3.org" viewBox="0 0 128 128" width="30" height="30">
+                        <rect x="8" y="8" width="112" height="112" rx="24" fill="#1E1E1E" />
+                        <path fill="#2e89ff"
+                          d="M48,32 C38,32 34,38 34,48 L34,54 C34,58 30,60 26,64 C30,68 34,70 34,74 L34,80 C34,90 38,96 48,96 L52,96 L52,86 L48,86 C44,86 44,84 44,80 L44,70 C44,64 38,64 38,64 C38,64 44,64 44,58 L44,48 C44,44 44,42 48,42 L52,42 L52,32 L48,32 Z M80,32 L76,32 L76,42 L80,42 C84,42 84,44 84,48 L84,58 C84,64 90,64 90,64 C90,64 84,64 84,70 L84,80 C84,84 84,86 80,86 L76,86 L76,96 L80,96 C90,96 94,90 94,80 L94,74 C94,70 98,68 102,64 C98,60 94,58 94,54 L94,48 C94,38 90,32 80,32 Z" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Iniciación al Desarrollo con IA</strong>
+                      <span>MoureDev & BigSchool</span>
+                    </div>
+                  </a>
+                  <a href="assets/certs/Certificado_ML-Amed-Torres-Britez.pdf" target="_blank" rel="noopener noreferrer"
+                    class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg xmlns="http://w3.org" viewBox="0 0 128 128" width="30" height="30">
+                        <rect x="8" y="8" width="112" height="112" rx="24" fill="#0054ff" />
+                        <text x="64" y="78" font-family="sans-serif" font-weight="900" font-size="52"
+                          text-anchor="middle" letter-spacing="-2" fill="#ffffff">BIG</text>
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Iniciación a Data Science</strong>
+                      <span>BIG School</span>
+                    </div>
+                  </a>
+                  <a href="assets/certs/Google-InteligenciaArtificial-y-productividad.pdf" target="_blank"
+                    rel="noopener noreferrer" class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="#4285F4" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853"
+                          d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05"
+                          d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335"
+                          d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>IA y Productividad</strong>
+                      <span>Google Gemini & Santander OpenAcademy</span>
+                    </div>
+                  </a>
+                  <a href="assets/certs/Prompting.pdf" target="_blank" rel="noopener noreferrer" class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#f35325" d="M1 1h10.5v10.5H1z" />
+                        <path fill="#81bc06" d="M12.5 1H23v10.5H12.5z" />
+                        <path fill="#05a6f0" d="M1 12.5h10.5V23H1z" />
+                        <path fill="#ffba08" d="M12.5 12.5H23V23H12.5z" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Prompting con IA</strong>
+                      <span>Microsoft & Founderz</span>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- Página 2 (3 certificaciones) -->
+                <div class="certs-page" role="group" aria-label="Página 2 de 2">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F80000" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="5" rx="9" ry="3" />
+                        <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+                        <path d="M3 12A9 3 0 0 0 21 12" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Bases de Datos & SQL Avanzado</strong>
+                      <span>Oracle Academy</span>
+                    </div>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="#049fd9" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="10" width="2" height="4" />
+                        <rect x="4.5" y="8" width="2" height="8" />
+                        <rect x="8" y="5" width="2" height="14" />
+                        <rect x="11.5" y="2" width="2" height="20" />
+                        <rect x="15" y="5" width="2" height="14" />
+                        <rect x="18.5" y="8" width="2" height="8" />
+                        <rect x="22" y="10" width="2" height="4" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Introducción a la Ciberseguridad</strong>
+                      <span>Cisco Networking Academy</span>
+                    </div>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="cert-card">
+                    <div class="cert-icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="#181717" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                      </svg>
+                    </div>
+                    <div class="cert-info">
+                      <strong>Git & GitHub Pro</strong>
+                      <span>Udemy</span>
+                    </div>
+                  </a>
+                </div>
+
+              </div><!-- /certs-track -->
+
+              <!-- Contador de página -->
+              <div class="certs-counter" id="certs-counter" aria-live="polite">
+                <span id="certs-counter-current" class="certs-counter-current">1</span>
+                <span class="certs-counter-sep">/</span>
+                <span class="certs-counter-total">2</span>
+              </div>
+
+              <!-- Navegación carrusel -->
+              <div class="certs-nav" role="group" aria-label="Navegación del carrusel">
+                <button class="certs-btn" id="certs-prev" aria-label="Certificaciones anteriores" disabled>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" aria-hidden="true">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+                <div class="certs-dots" id="certs-dots" role="tablist" aria-label="Páginas">
+                  <button class="certs-dot active" data-page="0" role="tab" aria-selected="true"
+                    aria-label="Página 1"></button>
+                  <button class="certs-dot" data-page="1" role="tab" aria-selected="false"
+                    aria-label="Página 2"></button>
+                </div>
+                <button class="certs-btn" id="certs-next" aria-label="Certificaciones siguientes">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Separador visual -->
+    <div class="section-divider" aria-hidden="true">
+      <span class="divider-dot"></span>
+      <span class="divider-line"></span>
+      <span class="divider-dot"></span>
+    </div>
+
+    <!-- ======================================================
+         6. CONTACTO
+    ====================================================== -->
+    <section class="section" id="contacto" aria-labelledby="contact-title">
+      <div class="section-inner">
+
+        <div class="section-label">/ Contacto</div>
+        <h2 class="section-title" id="contact-title">Trabajemos juntos</h2>
+        <p class="contact-lead">
+          ¿Qué tal si nos ponemos en contacto?
+        </p>
+        <div class="contact-grid">
+          <ul class="contact-links" aria-label="Formas de contacto">
+
+            <li>
+              <a href="https://linkedin.com/in/amed-torres-" target="_blank" rel="noopener noreferrer"
+                class="contact-link" aria-label="Ir a LinkedIn">
+                <div class="contact-link-icon" aria-hidden="true">
+                  <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
+                    viewBox="0 0 256 256">
+                    <path
+                      d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 
+                        39.907 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186l-.016 67.013ZM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009-.002-12.157 9.851-22.014 
+                        22.008-22.016 12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 
+                        8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453"
+                      fill="#0A66C2" />
+                  </svg>
+                </div>
+                <div class="contact-link-body">
+                  <span class="contact-link-label">
+                    LINKEDIN
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; opacity: 0.4;">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                  <span class="contact-link-desc">Publicaciones en general</span>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="mailto:amed.torres@icloud.com" class="contact-link" aria-label="Enviar email">
+                <div class="contact-link-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
+                    stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </div>
+                <div class="contact-link-body">
+                  <span class="contact-link-label">
+                    CORREO ELECTRÓNICO
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; opacity: 0.4;">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                  <span class="contact-link-desc">Contacto directo</span>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://github.com/amedtorres" target="_blank" rel="noopener noreferrer" class="contact-link"
+                aria-label="Ir a GitHub">
+                <div class="contact-link-icon" aria-hidden="true">
+                  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <title>GitHub</title>
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 
+                      1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 
+                      1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 
+                      0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                  </svg>
+                </div>
+                <div class="contact-link-body">
+                  <span class="contact-link-label">
+                    GITHUB
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; opacity: 0.4;">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                  <span class="contact-link-desc">Proyectos y más</span>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <p style="text-align: center;" class="footer-copy">© amedcode 2026</p>
+  </footer>
+
+  <!-- JS diferido, no bloquea render -->
+  <script src="script.js" defer></script>
+</body>
+
+</html>
