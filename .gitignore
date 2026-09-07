@@ -1,0 +1,8 @@
+# Sistema Operativo
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Configuración de editores
+.vscode/
+.antigravity/

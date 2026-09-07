@@ -1,218 +1,84 @@
-/**
- * Portfolio — Amed Torres
- */
 
 (function () {
   'use strict';
 
-  /* ─────────────────────────────────────────────────────────────────────
-     UTILIDADES
-  ───────────────────────────────────────────────────────────────────── */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-  /** Detectar soporte de prefers-reduced-motion */
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
+  /* ─────────────────────────────────────────────────────────────
+     1. THEME TOGGLE — claro / oscuro (FAB fijo abajo-derecha)
+  ───────────────────────────────────────────────────────────── */
+  function initTheme() {
+    const html = document.documentElement;
+    const metaTheme = $('#meta-theme-color');
+    const fab = $('#theme-toggle');
 
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = saved || (prefersDark ? 'dark' : 'light');
+    applyTheme(initial);
 
-  /* ─────────────────────────────────────────────────────────────────────
-     1. PARTÍCULAS CANVAS — SUTILES, OSCURAS, LENTAS
-  ───────────────────────────────────────────────────────────────────── */
-  function initParticles() {
-    if (prefersReducedMotion) return;
-    const canvas = $('#particles-canvas');
-    if (!canvas) return;
-
-
-
-    const ctx = canvas.getContext('2d', { alpha: true });
-    let rafId;
-    let particles = [];
-    let W, H;
-    let mouseX = -999, mouseY = -999;
-
-    /* Configuración */
-    const isMobile = window.innerWidth <= 640;
-    const CONFIG = {
-      count: isMobile ? 14 : 38,
-      minR: isMobile ? 1 : 1.5,
-      maxR: isMobile ? 2.5 : 4,
-      speedY: -0.18,   /* flotan hacia arriba */
-      speedXRange: 0.12,
-      mouseRadius: 120,
-      mouseForce: 0.9,
-      colors: [
-        '15,  23,  42',   /* slate-950  — máximo contraste */
-        '30,  41,  59',   /* slate-800 */
-        '51,  65,  85',   /* slate-700 */
-        '37,  99, 235',   /* blue-600 */
-        '79,  70, 229',   /* indigo-600 */
-        '99,  60, 180',   /* violet-600 */
-      ],
-      opacityMin: 0.18,  /* mínimo subido: visibles desde el inicio */
-      opacityMax: 0.45,  /* máximo: presencia clara, no intrusiva */
-    };
-
-    class Particle {
-      constructor(initial = false) {
-        this.init(initial);
-      }
-
-      init(initial = false) {
-        this.x = Math.random() * W;
-        this.y = initial
-          ? Math.random() * H                 /* arranque: distribuidas */
-          : H + Math.random() * 20;           /* reaparece por abajo */
-
-        this.r = CONFIG.minR + Math.random() * (CONFIG.maxR - CONFIG.minR);
-        this.speedX = (Math.random() - 0.5) * CONFIG.speedXRange;
-        this.speedY = CONFIG.speedY * (0.7 + Math.random() * 0.6);
-        this.alpha = CONFIG.opacityMin + Math.random() * (CONFIG.opacityMax - CONFIG.opacityMin);
-        this.color = CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)];
-        this.ox = 0;
-        this.oy = 0;
-      }
-
-      update() {
-        /* Movimiento base */
-        this.x += this.speedX + this.ox;
-        this.y += this.speedY + this.oy;
-
-        this.ox *= 0.90;
-        this.oy *= 0.90;
-
-        /* movimiento suave del ratón */
-        const dx = this.x - mouseX;
-        const dy = this.y - mouseY;
-        const dist = Math.hypot(dx, dy);
-        if (dist < CONFIG.mouseRadius && dist > 0) {
-          const force = (CONFIG.mouseRadius - dist) / CONFIG.mouseRadius;
-          const angle = Math.atan2(dy, dx);
-          this.ox += Math.cos(angle) * force * CONFIG.mouseForce;
-          this.oy += Math.sin(angle) * force * CONFIG.mouseForce;
-        }
-
-        /* Reiniciar si sale de pantalla */
-        if (this.y < -10 || this.x < -10 || this.x > W + 10) {
-          this.init();
-        }
-      }
-
-      draw() {
-        /* estilo difuminao */
-        const grad = ctx.createRadialGradient(
-          this.x, this.y, 0,
-          this.x, this.y, this.r * 3
-        );
-        grad.addColorStop(0, `rgba(${this.color}, ${this.alpha})`);
-        grad.addColorStop(0.6, `rgba(${this.color}, ${this.alpha * 0.5})`);
-        grad.addColorStop(1, `rgba(${this.color}, 0)`);
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      if (metaTheme) {
+        metaTheme.setAttribute('content', theme === 'dark' ? '#080808' : '#f8fafc');
       }
     }
 
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-      particles = Array.from({ length: CONFIG.count }, () => new Particle(true));
+    function toggle() {
+      const current = html.getAttribute('data-theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of particles) {
-        p.update();
-        p.draw();
-      }
-      rafId = requestAnimationFrame(animate);
-    }
-
-    /* Pausar cuando la pestaña no está visible */
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(rafId);
-      } else {
-        animate(); // reanuada
-      }
-    });
-
-    let mouseTick = 0;
-    document.addEventListener('mousemove', (e) => {
-      if (Date.now() - mouseTick < 32) return;
-      mouseTick = Date.now();
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    }, { passive: true });
-
-    document.addEventListener('mouseleave', () => {
-      mouseX = -999;
-      mouseY = -999;
-    });
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        resize();
-        animate();
-      });
-    });
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resize, 200);
-    }, { passive: true });
+    if (fab) fab.addEventListener('click', toggle);
   }
 
-  /* ─────────────────────────────────────────────────────────────────────
-     2. NAVEGACIÓN 
-  ───────────────────────────────────────────────────────────────────── */
+  /* ─────────────────────────────────────────────────────────────
+     2. NAVEGACIÓN — pill deslizante + hamburguesa móvil
+  ───────────────────────────────────────────────────────────── */
   function initNav() {
     const pill = $('#nav-pill');
     const links = $$('.nav-link');
     const navLinks = $('#nav-menu');
     const toggle = $('#nav-toggle');
+
     const isMobile = () => window.innerWidth <= 640;
 
-    if (!links.length || !navLinks) return;
+    if (!links.length) return;
 
-    /* ─── Desktop: Pill deslizante ─── */
+    /* Desktop*/
     function movePill(el) {
-      if (!pill || !el) return;
+      if (!pill || !el || isMobile()) return;
       const elRect = el.getBoundingClientRect();
       const navRect = navLinks.getBoundingClientRect();
       const offsetX = elRect.left - navRect.left;
-
       pill.style.width = `${elRect.width}px`;
       pill.style.height = `${elRect.height}px`;
       pill.style.transform = `translateX(${offsetX}px)`;
     }
 
+    /* Init pill */
     if (!isMobile()) {
-      const initialActive = $('.nav-link.active');
-      if (initialActive) {
-        requestAnimationFrame(() => movePill(initialActive));
-      }
+      const active = $('.nav-link.active');
+      if (active) requestAnimationFrame(() => movePill(active));
     }
 
-    /* ─── Detectar sección actual ─── */
+    /* Sección visible  */
     const sections = $$('section[id]');
-    const observer = new IntersectionObserver((entries) => {
+    const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
           const match = $(`.nav-link[href="#${id}"]`);
           if (!match) return;
-
           links.forEach((l) => l.classList.remove('active'));
           match.classList.add('active');
-
-          if (!isMobile() && pill) movePill(match);
+          if (!isMobile()) movePill(match);
         }
       });
     }, {
@@ -220,27 +86,26 @@
       threshold: 0,
     });
 
-    sections.forEach((s) => observer.observe(s));
+    sections.forEach((s) => io.observe(s));
 
-    /* ─── Click en links: Scroll suave + cerrar menú ─── */
+    /* Click en links → scroll suave + cerrar móvil */
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const target = $(link.getAttribute('href'));
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-          // Cerrar menú en móvil
           if (isMobile() && toggle && navLinks) {
             toggle.classList.remove('active');
             navLinks.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
           }
         }
       });
     });
 
-    /* ─── Móvil hamburguesa ─── */
-    if (isMobile() && toggle) {
+    /* Hamburguesa móvil */
+    if (toggle) {
       toggle.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = navLinks.classList.toggle('active');
@@ -248,10 +113,8 @@
         toggle.setAttribute('aria-expanded', String(isOpen));
       });
 
-      // Cerrar menú al clickear fuera de la cápsula
       document.addEventListener('click', (e) => {
-        const clickedCapsule = e.target.closest('.nav-capsule');
-        if (!clickedCapsule && navLinks.classList.contains('active')) {
+        if (!e.target.closest('.nav-capsule') && navLinks.classList.contains('active')) {
           toggle.classList.remove('active');
           navLinks.classList.remove('active');
           toggle.setAttribute('aria-expanded', 'false');
@@ -259,157 +122,129 @@
       });
     }
 
-    /* ─── Resize ─── */
     window.addEventListener('resize', () => {
-      if (!isMobile() && pill) movePill($('.nav-link.active'));
+      if (!isMobile()) movePill($('.nav-link.active'));
     }, { passive: true });
   }
-  /* ─────────────────────────────────────────────────────────────────────
-     3. SCROLL REVEAL 
-  ───────────────────────────────────────────────────────────────────── */
+
+  /* ─────────────────────────────────────────────────────────────
+     3. SCROLL REVEAL — solo en secciones (no en cada elemento)
+  ───────────────────────────────────────────────────────────── */
   function initScrollReveal() {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      $$('.reveal').forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
 
     const elements = $$('.reveal');
     if (!elements.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
+    const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); /* no re-observar una vez visible */
+          io.unobserve(entry.target);
         }
       });
     }, {
-      threshold: 0.12,
+      threshold: 0.08,
       rootMargin: '0px 0px -40px 0px',
     });
 
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((el) => io.observe(el));
   }
 
-  /* ─────────────────────────────────────────────────────────────────────
-     4. CARRUSEL DE CERTIFICACIONES
-  ───────────────────────────────────────────────────────────────────── */
-  function initCertsSlider() {
-    const track = $('#certs-track');
-    const prevBtn = $('#certs-prev');
-    const nextBtn = $('#certs-next');
-    const dots = $$('.certs-dot', $('#certs-dots'));
-    const counterEl = $('#certs-counter-current');
-    if (!track) return;
-
-    const pages = $$('.certs-page', track);
-    const total = pages.length;
-    let current = 0;
-
-    function lockTrackHeight() {
-      pages.forEach(p => p.removeAttribute('hidden'));
-      let maxH = 0;
-      pages.forEach(p => {
-        const h = p.getBoundingClientRect().height;
-        if (h > maxH) maxH = h;
-      });
-      track.style.minHeight = maxH + 'px';
-      // Volver a ocultar todas excepto la actual
-      pages.forEach((p, i) => {
-        if (i !== current) p.setAttribute('hidden', '');
-      });
-    }
-
-    function updateButtons() {
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === total - 1;
-    }
-
-    function show(index) {
-      /* Ocultar todas las páginas y mostrar la activa */
-      pages.forEach((p, i) => {
-        if (i === index) {
-          p.removeAttribute('hidden');
-          /* Forzar animación */
-          p.style.animation = 'none';
-          void p.offsetWidth;
-          p.style.animation = '';
-        } else {
-          p.setAttribute('hidden', '');
-        }
-      });
-
-      /* Actualizar dots */
-      dots.forEach((dot, i) => {
-        const isActive = i === index;
-        dot.classList.toggle('active', isActive);
-        dot.setAttribute('aria-selected', String(isActive));
-      });
-
-      /* Actualizar contador */
-      if (counterEl) {
-        counterEl.textContent = String(index + 1);
-      }
-
-      current = index;
-      updateButtons();
-    }
-
-    nextBtn.addEventListener('click', () => {
-      if (current < total - 1) show(current + 1);
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (current > 0) show(current - 1);
-    });
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        show(parseInt(dot.dataset.page, 10));
-      });
-    });
-
-    /* Init */
-    show(0);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        lockTrackHeight();
-      });
-    });
-
-    /* Recalcular en resize */
-    window.addEventListener('resize', lockTrackHeight, { passive: true });
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────
-     5. PROYECTOS CLICKEABLES
-  ───────────────────────────────────────────────────────────────────── */
-  function initClickableCards() {
+  /* ─────────────────────────────────────────────────────────────
+     4. PROYECTOS CLICKEABLES — toda la fila abre el repositorio
+  ───────────────────────────────────────────────────────────── */
+  function initClickableProjects() {
     const cards = $$('.project-card');
-
     cards.forEach((card) => {
-      const link = card.querySelector('.project-title a');
+      const link = card.querySelector('.project-ext-link, .project-link');
       if (!link) return;
-
       const href = link.getAttribute('href');
-      const target = link.getAttribute('target') || '_blank';
-      const rel = link.getAttribute('rel') || 'noopener noreferrer';
-
       card.addEventListener('click', (e) => {
         if (e.target.closest('a')) return;
-
-        // En cualquier otra parte de la card, abrimos el link
-        window.open(href, target, rel === 'noopener noreferrer' ? 'noopener,noreferrer' : '');
+        window.open(href, '_blank', 'noopener,noreferrer');
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
       });
     });
   }
 
-  /* ─────────────────────────────────────────────────────────────────────
+  /* ─────────────────────────────────────────────────────────────
+     5. PARTICLES BACKGROUND
+  ───────────────────────────────────────────────────────────── */
+  function initParticles() {
+    const canvas = document.getElementById('bg-particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const particles = [];
+    const numParticles = 20;
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 4 + 2, // tamaño de 2 a 6
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        colorIndex: Math.floor(Math.random() * 3),
+        blur: Math.random() * 4 + 2 // nivel de desenfoque por partícula
+      });
+    }
+
+    // Colores según tema
+    const getColors = () => document.documentElement.getAttribute('data-theme') === 'light'
+      ? ['rgba(37, 99, 235, 0.4)', 'rgba(79, 70, 229, 0.3)', 'rgba(99, 102, 241, 0.35)']
+      : ['rgba(37, 99, 235, 0.6)', 'rgba(79, 70, 229, 0.5)', 'rgba(99, 102, 241, 0.5)'];
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      const colors = getColors();
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -p.r) p.x = width + p.r;
+        if (p.x > width + p.r) p.x = -p.r;
+        if (p.y < -p.r) p.y = height + p.r;
+        if (p.y > height + p.r) p.y = -p.r;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = colors[p.colorIndex];
+        ctx.filter = `blur(${p.blur}px)`;
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  /* ─────────────────────────────────────────────────────────────
      INIT
-  ───────────────────────────────────────────────────────────────────── */
+  ───────────────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
-    initParticles();       /* Partículas canvas */
-    initNav();             /* Navegación pill animada */
-    initScrollReveal();    /* Reveal en scroll con IntersectionObserver */
-    initCertsSlider();     /* Carrusel certificaciones */
-    initClickableCards();  /* Cards de proyectos clickeables al completo */
+    initTheme();
+    initNav();
+    initScrollReveal();
+    initClickableProjects();
+    initParticles();
   });
 
 })();
