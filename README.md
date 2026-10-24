@@ -1,5 +1,5 @@
 <p align="center">
-  <strong>CLICK AND VISIT MY PORTFOLIO</strong> 🧑🏻‍💻
+  <strong>CLICK AND VISIT MY PORTFOLIO WEB</strong> 🧑🏻‍💻
 </p>
 
 <p align="center">

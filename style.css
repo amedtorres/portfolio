@@ -1054,7 +1054,7 @@ main {
   gap: 1.5rem;
   height: max-content;
   width: 100%;
-  animation: scroll-marquee-vertical 25s linear infinite;
+  animation: scroll-marquee-vertical 28s linear infinite;
 }
 
 .certs-list:hover {
@@ -1160,24 +1160,28 @@ main {
   font-weight: 500;
 }
 
-/* Sin bordes, solo gap y fondo sutil */
+/* Sin bordes, 4 en una fila horizontal en modo ordenador */
 .contact-links {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
   max-width: 100%;
+}
+
+.contact-links li {
+  display: flex;
+  min-width: 0;
 }
 
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
+  gap: 0.85rem;
+  padding: 1.15rem 1.15rem;
   border-radius: var(--r-md);
   background: var(--bg-mid);
-  flex: 1;
-  min-width: 200px;
+  width: 100%;
+  min-width: 0;
   transition: background var(--dur-fast), color var(--dur-fast);
 }
 
@@ -1189,9 +1193,15 @@ main {
   background: var(--accent-dim);
 }
 
+@media (max-width: 900px) {
+  .contact-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 640px) {
   .contact-links {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .contact-link {
@@ -1216,7 +1226,8 @@ main {
 /* Todos grises, color al hover */
 .contact-link--linkedin .contact-icon,
 .contact-link--email .contact-icon,
-.contact-link--github .contact-icon {
+.contact-link--github .contact-icon,
+.contact-link--cv .contact-icon {
   color: var(--text-xlo);
 }
 
@@ -1232,10 +1243,16 @@ main {
   color: var(--text-hi);
 }
 
+.contact-link--cv:hover .contact-icon {
+  color: #10b981;
+}
+
 .contact-body {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .contact-label {
@@ -1247,10 +1264,13 @@ main {
 }
 
 .contact-value {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-lo);
   transition: color var(--dur-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-link--linkedin:hover .contact-value {
@@ -1263,6 +1283,10 @@ main {
 
 .contact-link--github:hover .contact-value {
   color: var(--text-hi);
+}
+
+.contact-link--cv:hover .contact-value {
+  color: #10b981;
 }
 
 .contact-arrow {
